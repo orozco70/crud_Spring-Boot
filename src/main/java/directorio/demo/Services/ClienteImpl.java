@@ -3,6 +3,8 @@ package directorio.demo.Services;
 import java.util.List;
 import java.util.Optional;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,9 +30,10 @@ public class ClienteImpl implements ClienteService {
 	}
 
 	@Override
-	public Cliente agregar(Cliente dep) {
 
-		return repo_cli.save(dep);
+	public Cliente agregar(Cliente cliente) {
+
+		return repo_cli.save(cliente);
 	}
 
 	@Override

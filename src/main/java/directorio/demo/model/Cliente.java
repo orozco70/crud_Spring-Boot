@@ -4,7 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Table;
-
+import javax.validation.constraints.NotEmpty;
 import javax.persistence.Id;
 
 @Entity
@@ -14,10 +14,15 @@ public class Cliente {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idCliente;
+	@NotEmpty(message="El nombre del Cliente es obligatorio")
 	private String nombre;
+	@NotEmpty(message="El  Apellido es obligatorio")
 	private String apellido;
+	@NotEmpty(message="El  DNI es obligatorio")
 	private String dni;
+	@NotEmpty(message="El # TELEFONO es obligatorio")
 	private String telefono;
+	@NotEmpty(message="La DIRECCIN DE CORREO es obligatorio")
 	private String email;
 
 	public Long getIdCliente() {

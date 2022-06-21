@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html>
+<head th:replace="template :: cabecera">
+
+</head>
+<body>
+	<nav th:replace="template :: nav_bar"></nav>
+
+	<div class="container ">
+		<div class="row ">
+
+			<br>
+			<br>
+			<div>
+				<a class="btn btn-success mb-4" th:href="@{/cli/add}">Agregar</a>
+			</div>
+
+
+
+
+			<div class="alert alert-success" th:if="${msgExito ne null}" >
+			[[${msgExito}]]
+			</div>
+
+			<table id="listcli"  class="table table-bordered table-striped">
+				<thead>
+					<tr>
+						<th>ID</th>
+						<th>nombre</th>
+						<th>apellido</th>
+						<th>dni</th>
+						<th>telefono</th>
+						<th>email</th>
+						<th>Acciones</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="listas : ${lista}">
+						<td th:text=${listas.idCliente}></td>
+						<td th:text=${listas.nombre}></td>
+						<td th:text=${listas.apellido}></td>
+						<td th:text=${listas.dni}></td>
+						<td th:text=${listas.telefono}></td>
+						<td th:text=${listas.email}></td>
+						<td><a href="" class="btn btn-warning">Editar</a> <a href=""
+							class="btn btn-danger">Eliminar </a></td>
+
+					</tr>
+
+				</tbody> 
+
+			</table>
+
+		</div>
+	</div>
+</body>
+
+<script type="application/javascript">
+
+//var ajaxUrl = [[ @{'/employees'} ]];
+
+    $(document).ready( function () {
+        $('#listcli').DataTable({
+	 });
+    } );
+</script>
+
+</html>

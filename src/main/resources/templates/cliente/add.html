@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html>
+<head th:replace="template :: cabecera">
+
+</head>
+<body>
+	<nav th:replace="template :: nav_bar"></nav>
+
+	<div class="container">
+		<div class="col-md-5">
+
+			<h2>Agregar Cliente</h2>
+			<form th:object="${cliente}" th:action="@{/cli/save}" method="POST">
+
+				<div class="form-group">
+
+					<div class="mb-3">
+						<label for="nombre" class="form-label">Nombre Cliente</label> <input
+							type="text" class="form-control" id="nombre" th:field="*{nombre}"
+							placeholder="Nombre Cliente">
+							<small class="form-text text-danger" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></small>
+					</div>
+					 
+				</div>
+
+				<div class="form-group">
+					<div class="mb-3">
+						<label for="apellido" class="form-label">Apellidos Cliente</label>
+						<input type="text" class="form-control" id="apellido"
+							th:field="*{apellido}" placeholder="Apellidos Cliente">
+							<small class="form-text text-danger" th:if="${#fields.hasErrors('apellido')}" th:errors="*{apellido}"></small>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<div class="mb-3">
+						<label for="dni" class="form-label">DNI Cliente</label> <input
+							type="text" class="form-control" id="dni" th:field="*{dni}"
+							placeholder="DNI Cliente">
+							<small class="form-text text-danger" th:if="${#fields.hasErrors('dni')}" th:errors="*{dni}"></small>
+							
+					</div>
+				</div>
+
+				<div class="form-group">
+					<div class="mb-3">
+						<label for="telefono" class="form-label">Telefono Cliente</label>
+						<input type="text" class="form-control" id="telefono"
+							th:field="*{telefono}" placeholder="Telefono Cliente">
+							<small class="form-text text-danger" th:if="${#fields.hasErrors('telefono')}" th:errors="*{telefono}"></small>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<div class="mb-3">
+						<label for="email" class="form-label">Correo Cliente</label> <input
+							type="email" class="form-control" id="email" th:field="*{email}"
+							placeholder="Correo Cliente">
+							<small class="form-text text-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></small>
+					</div>
+				</div>
+				<button class="btn btn-success" onclick="send()">Guardar</button>
+				&nbsp;<a class="btn btn-warning" th:href="@{/cli/show}">Ver
+					todos</a>
+			</form>
+
+
+
+
+
+		</div>
+	</div>
+
+	
+
+</body>
+</html>
