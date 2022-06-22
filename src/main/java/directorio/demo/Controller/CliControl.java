@@ -33,14 +33,26 @@ public class CliControl {
 		return ResponseEntity.ok(cli);
 	}
 
-	@GetMapping("/add")
-	public String add(Model model) {
-		Cliente cliente = new Cliente();
-		model.addAttribute("cliente", cliente);
+	@GetMapping("/add/{id}")
+	public String add(Model model, @PathVariable("id") Long id) {
+
+		try {
+			if (id == 0) {
+				model.addAttribute("cliente", new Cliente());
+
+			} else {
+				model.addAttribute("cliente", cliImpl.findbyid(id));
+
+			}
+		} catch (Exception e) {
+        model.addAttribute("error", e.getMessage());
+        return "error";
+		}
+
 		return "cliente/add";
 	}
 
-	@GetMapping("/show")
+	@GetMapping(value = { "/show", "" })
 	public String getall(Model model) {
 		List<Cliente> cli = (List<Cliente>) cliImpl.findall();
 
@@ -50,12 +62,12 @@ public class CliControl {
 	}
 
 	@PostMapping("/save")
-	public String agrega( @Valid Cliente cliente,BindingResult result ,RedirectAttributes ra ) {
+	public String agrega(@Valid @ModelAttribute("cliente") Cliente cliente, BindingResult result, RedirectAttributes ra) {
 
 		if (result.hasErrors()) {
 			return "cliente/add";
 		}
-		
+
 		cliImpl.agregar(cliente);
 		ra.addFlashAttribute("msgExito", "Guardado Correcto");
 		return "redirect:/cli/show";

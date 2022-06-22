@@ -4,7 +4,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Table;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 import javax.persistence.Id;
 
 @Entity
@@ -15,6 +18,7 @@ public class Cliente {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idCliente;
 	@NotEmpty(message="El nombre del Cliente es obligatorio")
+	@Size(min = 3, max = 8, message="El nombre del Cliente tiene que tener entre 3 y 15 caracteres")
 	private String nombre;
 	@NotEmpty(message="El  Apellido es obligatorio")
 	private String apellido;
