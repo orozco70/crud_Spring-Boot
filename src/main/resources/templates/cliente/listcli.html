@@ -10,8 +10,7 @@
 	<div class="container ">
 		<div class="row ">
 
-			<br>
-			<br>
+			<br> <br>
 			<div>
 				<a class="btn btn-success mb-4" th:href="@{/cli/add/0}">Agregar</a>
 			</div>
@@ -19,11 +18,10 @@
 
 
 
-			<div class="alert alert-success" th:if="${msgExito ne null}" >
-			[[${msgExito}]]
-			</div>
+			<div class="alert alert-success" th:if="${msgExito ne null}">
+				[[${msgExito}]]</div>
 
-			<table id="listcli"  class="table table-bordered table-striped">
+			<table id="listcli" class="table table-bordered table-striped">
 				<thead>
 					<tr>
 						<th>ID</th>
@@ -43,12 +41,14 @@
 						<td th:text=${listas.dni}></td>
 						<td th:text=${listas.telefono}></td>
 						<td th:text=${listas.email}></td>
-						<td><a th:href= "@{/cli/add/{id}(id=${listas.idCliente})}" class="btn btn-warning">Editar</a> 
-						    <a th:href= "@{/cli/del/{id}(id=${listas.idCliente})}" class="btn btn-danger">Eliminar </a></td>
+						<td><a th:href="@{/cli/add/{id}(id=${listas.idCliente})}"
+							class="btn btn-warning">Editar</a> <a
+							th:href="@{/cli/del/{id}(id=${listas.idCliente})}"
+							class="btn btn-danger">Eliminar </a></td>
 
 					</tr>
 
-				</tbody> 
+				</tbody>
 
 			</table>
 
@@ -57,6 +57,7 @@
 </body>
 
 <script type="application/javascript">
+	
 
 //var ajaxUrl = [[ @{'/employees'} ]];
 
@@ -64,6 +65,7 @@
         $('#listcli').DataTable({
 	 });
     } );
+
 </script>
 
 </html>

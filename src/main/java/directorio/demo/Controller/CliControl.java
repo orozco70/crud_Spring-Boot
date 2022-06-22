@@ -26,6 +26,8 @@ public class CliControl {
 
 	@Autowired
 	private ClienteImpl cliImpl;
+	
+	
 
 	@GetMapping("/all")
 	public ResponseEntity<List<Cliente>> getall() {
@@ -39,13 +41,14 @@ public class CliControl {
 		try {
 			if (id == 0) {
 				model.addAttribute("cliente", new Cliente());
+				model.addAttribute("titulo", "Agregar Cliente");
 
 			} else {
 				model.addAttribute("cliente", cliImpl.findbyid(id));
-
+				model.addAttribute("titulo", "Modificar Cliente");
 			}
 		} catch (Exception e) {
-        model.addAttribute("error", e.getMessage());
+       model.addAttribute("error", e.getMessage());
         return "error";
 		}
 
@@ -57,6 +60,7 @@ public class CliControl {
 		List<Cliente> cli = (List<Cliente>) cliImpl.findall();
 
 		model.addAttribute("lista", cli);
+		
 		return "cliente/listcli";
 
 	}
@@ -73,6 +77,7 @@ public class CliControl {
 		return "redirect:/cli/show";
 	}
 
+	
 	@GetMapping("/{id}")
 	public ResponseEntity<?> getone(@PathVariable Long id) {
 		try {
@@ -83,10 +88,12 @@ public class CliControl {
 		}
 	}
 
-	@GetMapping("/del{id}")
-	public void eliminar(@PathVariable Long id) {
-
-		cliImpl.eliminar(id);
-
-	}
+	 @GetMapping("/del/{id}")
+	    public String eliminar(@PathVariable Long id,RedirectAttributes ra) {
+		 cliImpl.eliminar(id);
+		 ra.addFlashAttribute("msgExito", "Eliminado Correcto");
+		 return "redirect:/cli/show";
+	    }
+	
+	
 }
