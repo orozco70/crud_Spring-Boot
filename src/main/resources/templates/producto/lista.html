@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="template :: cabecera">
+
+<title>Insert title here</title>
+</head>
+<body>
+	<nav th:replace="template :: nav_bar"></nav>
+	<div class="container">
+		<div class="row ">
+			<br> <br>
+			<div>
+				<a class="btn btn-success mb-4" th:href="@{/prod/add/0}">Agregar</a>
+			</div>
+
+			<div class="alert alert-success" th:if="${msgExito ne null}">
+				[[${msgExito}]]</div>
+
+			<table id="tblprod" class="table table-bordered table-striped">
+				<thead>
+					<tr>
+						<td>Id</td>
+						<td>Nombre</td>
+						<td>Precio</td>
+						<td>Acciones</td>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="listap : ${prodlist}" >
+						<td th:text=${listap.idProducto}></td>
+						<td th:text=${listap.nombre}></td>
+						<td th:text=${listap.precio}></td>
+						<td>
+						
+						<a th:href="@{/prod/add/{id}(id=${listap.idProducto})}" class="btn btn-warning">Editar</a>
+						<a th:href="@{/prod/del/{id}(id=${listap.idProducto})}" class="btn btn-danger">Eliminar</a>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+</body>
+</html>
