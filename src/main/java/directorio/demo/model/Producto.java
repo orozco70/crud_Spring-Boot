@@ -5,6 +5,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
 
 @Entity
 @Table(name = "producto")
@@ -13,7 +14,9 @@ public class Producto {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Id
 	private Long idProducto;
+	@NotEmpty(message="El nombre del Producto es obligatorio")
 	private String nombre;
+	@NotEmpty(message="La Cantidad es obligatoria")
 	private String precio;
 
 	public Long getIdProducto() {

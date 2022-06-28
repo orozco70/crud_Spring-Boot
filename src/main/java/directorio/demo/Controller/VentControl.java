@@ -14,7 +14,7 @@ import directorio.demo.model.Venta;
 
 
 @Controller
-@RequestMapping("venta")
+@RequestMapping("vent")
 public class VentControl {
 	
 	@Autowired

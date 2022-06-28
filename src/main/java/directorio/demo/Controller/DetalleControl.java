@@ -12,13 +12,13 @@ import directorio.demo.Services.DetalleImpl;
 import directorio.demo.model.DetalleVenta;
 
 @Controller
-@RequestMapping("detalle")
+@RequestMapping("det")
 public class DetalleControl {
 	
 	@Autowired
 	private DetalleImpl detalImpl;
 	
-	@GetMapping(value = {"/",""})
+	@GetMapping(value = {"/","all",""})
 	public ResponseEntity<List<DetalleVenta>> getall()
 	{
 		List<DetalleVenta> detallev = (List<DetalleVenta>) detalImpl.findall();

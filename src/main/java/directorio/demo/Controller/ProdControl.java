@@ -3,6 +3,8 @@ package directorio.demo.Controller;
 import java.util.List;
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +21,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import ch.qos.logback.core.status.Status;
 import directorio.demo.Services.ProducImpl;
+import directorio.demo.model.Cliente;
 import directorio.demo.model.Producto;
 import directorio.demo.repo.Repoproducto;
 
@@ -35,19 +38,6 @@ public class ProdControl {
 		return ResponseEntity.ok(prod);
 	}
 
-	/*
-	 * @RequestMapping(value = "/test{nombre}", method = RequestMethod.GET) public
-	 * ResponseEntity<?> test(String nombre) {
-	 * 
-	 * try { return
-	 * ResponseEntity.status(HttpStatus.OK).body(prod_impl.listapornombre(nombre));
-	 * 
-	 * } catch (Exception e) { return
-	 * ResponseEntity.status(HttpStatus.NOT_FOUND).body(("{\"Error\": \"" +
-	 * e.getMessage() + "\" }")); }
-	 * 
-	 * }
-	 */
 
 	@RequestMapping(value = { "/", "", "show" }, method = RequestMethod.GET)
 	public String mostrar(Model model) {
@@ -74,12 +64,12 @@ public class ProdControl {
 	}
 
 	@PostMapping("/save")
-	public String save(Producto pr, BindingResult result, RedirectAttributes ra) {
+	public String agrega(@Valid @ModelAttribute("producto")  Producto producto, BindingResult result, RedirectAttributes ra) {
+	
 		if (result.hasErrors()) {
-
-			return "prod/add";
+			return "producto/add";
 		}
-		prod_impl.agregar(pr);
+		prod_impl.agregar(producto);
 		ra.addFlashAttribute("MsgExito", "Guardado con Exito");
 		return "redirect:/prod/show";
 
